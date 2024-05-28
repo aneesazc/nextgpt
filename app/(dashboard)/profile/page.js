@@ -1,10 +1,17 @@
 import { UserProfile } from '@clerk/nextjs'
-import React from 'react'
+import { auth } from '@clerk/nextjs/server';
+import { fetchUserTokensById } from '../../../utils/action';
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
+    const { userId } = auth();
+    const currentTokens = await fetchUserTokensById(userId);
     return (
-        <UserProfile routing='hash' />
-    )
-}
-
-export default ProfilePage
+        <div>
+            <h2 className='mb-8 ml-8 text-xl font-extrabold'>
+                Token Amount : {currentTokens}
+            </h2>
+            <UserProfile routing='hash' />
+        </div>
+    );
+};
+export default ProfilePage;

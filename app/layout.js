@@ -3,8 +3,8 @@ import "./globals.css";
 import {
   ClerkProvider
 } from '@clerk/nextjs';
-// import Providers from "./providers"
 import { Toaster } from "react-hot-toast";
+import ReactQueryProvider from './providers';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +19,10 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          {/* <Providers> */}
-          <Toaster position="bottom-center" />
-          {children}
-          {/* </Providers> */}
+          <ReactQueryProvider>
+            <Toaster position="bottom-center" />
+            {children}
+          </ReactQueryProvider>
         </body>
       </html>
     </ClerkProvider>
